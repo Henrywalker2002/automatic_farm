@@ -21,15 +21,18 @@ class DataCollection(BaseModel):
     lasttimeFertilize: datetime 
 
 class Schedule(BaseModel):
-    ID : int 
     type_ : int
     airHumidity : Optional[float]
     soilMoisture : Optional[float]
     temperature : Optional[float]
     brightness : Optional[float]
     isEveryday: bool
-    date : Optional[datetime]
-    startTime : datetime
-    endTime: datetime
+    date : Optional[str]
+    startTime : Optional[datetime]
+    endTime: Optional[datetime]
     username: str
+    timeWater : Optional[int]
+
+class Detection(BaseModel):
+    time : datetime
 
