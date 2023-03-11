@@ -1,19 +1,27 @@
 import React from 'react';
 import Nav from 'react-bootstrap/Nav';
+import Infor from "./Infor"
+import Setup from './setup';
+import { BrowserRouter as Router, Route, Routes, Link} from "react-router-dom";
 import './Nhi.css';
 
 function Tabs() {
   return (
-    <Nav
-      className = "nav"
-    >
+    <Router>
+    <Nav className = "nav">
       <Nav.Item>
-        <Nav.Link href="/info">Information</Nav.Link>
+        <Link to ="/infor">Information</Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link href="/setup">Set up</Nav.Link>
+        <Link to ="/setup">Set up</Link>
       </Nav.Item>
     </Nav>
+    <Routes>
+        <Route exact path='/infor' element={<Infor/>} />
+        <Route exact path='/setup' element={< Setup/>} />
+    </Routes>
+    </Router>
+
   );
 }
 

@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link} from "react-router-dom";
 import MyNav from './MyNav';
 //////
 
@@ -18,19 +18,36 @@ import './App.css';
 // import MyNav from './MyNav';
 function App() {
   return (
-    <Router>
-    <div className="App">
-        
-        {/* <MyNav />
-        <Title/>
-        <Tabs/> */}
-      
-        <Route path="/" exact component={Setup} />
-        <Route path="/setup" exact component={Setup} />
-        <Route path="/infor" component={Infor} />
-        
-    </div>
-    </Router>
+        <div className = "app">
+          <MyNav />
+          <Title />
+          <Tabs />
+          {/* <MyNav />
+          <Title/>
+          <Tabs/>
+          <Setup/> */}
+            {/* <ul className="App-header">
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/setup">About Us</Link>
+              </li>
+              <li>
+                <Link to="/infor">Contact Us</Link>
+              </li>
+            </ul>
+           <Routes>
+                 <Route exact path='/' element={< Setup />}></Route>
+                 <Route exact path='/setup' element={< Setup />}></Route>
+                 <Route exact path='/infor' element={< Infor />}></Route>
+          </Routes> */}
+
+        {/* <Route exact path="/" element = {<Setup/>} /> 
+        <Route exact path="/setup" element={<Setup />} />
+        <Route exact path="/infor" element={<Infor />} /> */}
+
+        </div>
   );
 }
 
