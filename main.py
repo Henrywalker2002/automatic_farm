@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Body
+from fastapi import FastAPI, Body, Request
 from pymongo import MongoClient
 from model import *
 import re
@@ -6,6 +6,7 @@ import uvicorn
 from datetime import datetime
 from fastapi.middleware.cors import CORSMiddleware
 from IOT import IOT
+import multiprocessing
 
 app = FastAPI()
 
@@ -41,9 +42,9 @@ class AutomaticFarm:
                 row = self.adminColl.find_one({"username" : username, "password":password})
                 return {"result": "success", "message" : "admin"} if row is not None else {"result": "fail", "message" : "username or password is invalid"}
             else:
-                row = self.userColl.find_one({"username" : "username", "password" : password})
+                row = self.userColl.find_one({"username" : username, "password" : password})
                 if row is not None:
-                    if row.isBan:
+                    if row.get("isBan"):
                         return {"result": "fail", "message" : "your account is banned"}
                     else:
                         return {"result":"success", "message": "user"}
@@ -122,13 +123,15 @@ class AutomaticFarm:
             water = self.shedule.find_one({"type": 1, "date" : date_obj})
             if water is None:
                 water = self.shedule.find_one({"type" : 1, "isEveryday": True})
-            fertilize = self.shedule.find_one({"type": 2, "date" : date})
+            fertilize = self.shedule.find_one({"type": 2, "date" : date_obj})
             if fertilize is None:
                 fertilize = self.shedule.find_one({"type" : 2, "isEveryday": True})
-            light = self.shedule.find_one({"type": 3, "date" : date})
+            light = self.shedule.find_one({"type": 3, "date" : date_obj})
             if light is None:
                 light = self.shedule.find_one({"type" : 3, "isEveryday": True})
-            water.pop("_id")
+            if water is not None: water.pop("_id")
+            if fertilize is not None : fertilize.pop("_id")
+            if light is not None : light.fertilize("_id")
             return {"result": "success", "message": [water, fertilize, light]}
         except Exception as e:
             return {"result" : "fail", "message" : str(e)}
@@ -150,7 +153,20 @@ class AutomaticFarm:
             return {"result":"success"}
         except Exception as e:
             return {"result" : "fail", "message" : str(e)}
-
+    
+    def actionNow(self, type_: int, tail : int):
+        try:
+            if type_ is None or tail is None:
+                return {"result": "fail", "message": "wrong json"}
+            if type_ < 1 or type_ > 3:
+                return {"result" : "fail", "message" :"1 is water, 2 is fertilize, 3 is light"}
+            if type_ == 3 and tail not in [0,1]:
+                return {"result" : "fail", "message" : "flag must be 0 or 1"}
+            message = str(type_) + ':' + str(tail)
+            self.iot.actionNow(message)
+            return {"result": "success", "message" : "done"}
+        except Exception as e:
+            return {"result" : "fail", "message" : str(e)}
 
 AF = AutomaticFarm()
 
@@ -191,6 +207,14 @@ async def getDetect():
 async def sendData(time, temperature, airHumidity, soilMoisture, brightness, isWatering, isFertilizing, lastTimeWater, lastTimeFertilize):
     return AF.sendData(time, temperature, airHumidity, soilMoisture, brightness, isWatering, isFertilizing, lastTimeWater, lastTimeFertilize)
 
+@app.post("/actionNow")
+async def actionNow(request: Request):
+    json = await request.json()
+    if json.get("type_") == 3:
+        flag = json.get("flag")
+        return AF.actionNow(json.get("type_"), flag)
+    return AF.actionNow(json.get("type_"), json.get("timeWater"))
+
 origins = [
     "http://localhost:3000",
 ]
@@ -203,6 +227,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+def apprun():
+    uvicorn.run(app, host="0.0.0.0", port=8000)
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    p1 = multiprocessing.Process(target=AF.iot.collectData)
+    p2 = multiprocessing.Process(target=AF.iot.getDetection)
+    p3 = multiprocessing.Process(target=apprun)
+    p3.start()
+    p1.start()
+    p2.start()
+    p1.join()
+    p2.join()
+    p3.json()

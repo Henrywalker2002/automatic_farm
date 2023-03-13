@@ -62,10 +62,11 @@ class IOT:
         dataSend = ':'.join(lst)
         aio.send("brightnessCond", dataSend)
     
+    def actionNow(self, type_ :str):
+        aio.send("controlwork", type_)
 
 if __name__ == "__main__":
     iot = IOT()
-    iot.setCondWater(20, 30, 30)
     p1 = multiprocessing.Process(target=iot.collectData)
     p2 = multiprocessing.Process(target=iot.getDetection)
     p1.start()
