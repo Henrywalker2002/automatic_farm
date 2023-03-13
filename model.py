@@ -28,8 +28,8 @@ class Schedule(BaseModel):
     brightness : Optional[float]
     isEveryday: bool
     date : Optional[str]
-    startTime : Optional[datetime]
-    endTime: Optional[datetime]
+    startTime : Optional[str]
+    endTime: Optional[str]
     username: str
     timeWater : Optional[int]
 

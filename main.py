@@ -5,6 +5,7 @@ import re
 import uvicorn
 from datetime import datetime
 from fastapi.middleware.cors import CORSMiddleware
+from IOT import IOT
 
 app = FastAPI()
 
@@ -18,6 +19,7 @@ class AutomaticFarm:
         self.shedule = db["schedule"]
         self.dataColl = db["dataCollection"]
         self.detect = db["detection"]
+        self.iot = IOT()
         
     def insertUser(self, username: str, password: str, adminUsername : str):
         if re.match(".*(admin).*", username):
@@ -49,6 +51,15 @@ class AutomaticFarm:
         except Exception as e:
             return {"result" : "fail", "message": str(e)}
     
+    def sendData(self, time, temperature, airHumidity, soilMoisture, brightness, isWatering, isFertilizing, lastTimeWater, lasttimeFertilize):
+        try :
+            data = {"time":time ,"temperature":temperature ,"airHumidity":airHumidity ,"soilMoisture":soilMoisture ,
+                    "brightness":brightness ,"isWatering":isWatering ,"isFertilizing":isFertilizing ,"lastTimeWater":lastTimeWater ,
+                    "lastTimeFertilize":lasttimeFertilize}
+            self.dataColl.insert_one(data)
+        except Exception as e:
+            return {"result" : "fail", "message": str(e)}      
+    
     def getData(self):
         try:
             rows = self.dataColl.find().sort("_id", -1).limit(1)
@@ -76,12 +87,14 @@ class AutomaticFarm:
                 soilMoisture = shedule.soilMoisture
                 airHumidity = shedule.airHumidity
                 timeWater = shedule.timeWater
+                self.iot.setCondWater(temperature, airHumidity, soilMoisture, timeWater, type_)
                 data = {"type" : type_, "isEveryday" : isEveryday, "date": date_obj, "timeWater" : timeWater,  
                 "temperature": temperature, "soilMoisture": soilMoisture, "airHumidity": airHumidity}
             elif type_ == 3:
                 startTime = shedule.startTime
                 endTime = shedule.endTime
                 brightness = shedule.brightness
+                self.iot.setCondBrightness(brightness, startTime, endTime)
                 data = {"type" : type_, "isEveryday" : isEveryday, "date": date_obj, "startTime": startTime, "endTime" : endTime, 
                 "brightness": brightness}
             else:
@@ -173,6 +186,10 @@ async def addDetect(detect: Detection):
 @app.get("/detection")
 async def getDetect():
     return AF.getDetection()
+
+@app.get("/sendData")
+async def sendData(time, temperature, airHumidity, soilMoisture, brightness, isWatering, isFertilizing, lastTimeWater, lastTimeFertilize):
+    return AF.sendData(time, temperature, airHumidity, soilMoisture, brightness, isWatering, isFertilizing, lastTimeWater, lastTimeFertilize)
 
 origins = [
     "http://localhost:3000",
