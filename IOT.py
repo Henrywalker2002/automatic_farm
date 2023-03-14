@@ -20,19 +20,21 @@ class IOT:
         pass
     
     def collectData(self): 
-        dataCollection = aio.receive("datacollection").value
-        templst = dataCollection.split(':')
-        temperature, airHumidity, soilMoisture, brightness = templst[0], templst[1], templst[2], templst[3]
-        print(templst)
-        timeCollect = datetime.datetime.now()
         while True:
-            timeDiff = datetime.datetime.now() - timeCollect
-            if timeDiff.seconds >= 5*60:
-                dataCollection = aio.receive("datacollection").value
-                templst = dataCollection.split(':')
-                temperature, airHumidity, soilMoisture, brightness = templst[0], templst[1], templst[2], templst[3]
-                print(templst)
-                timeCollect = datetime.datetime.now()
+            dataCollection = aio.receive("datacollection").value
+            templst = dataCollection.split(':')
+            temperature, airHumidity, soilMoisture, brightness = templst[0], templst[1], templst[2], templst[3]
+            print(templst)
+            timeCollect = datetime.datetime.now()
+            time.sleep(600)
+        # while True:
+        #     timeDiff = datetime.datetime.now() - timeCollect
+        #     if timeDiff.seconds >= 5*60:
+        #         dataCollection = aio.receive("datacollection").value
+        #         templst = dataCollection.split(':')
+        #         temperature, airHumidity, soilMoisture, brightness = templst[0], templst[1], templst[2], templst[3]
+        #         print(templst)
+        #         timeCollect = datetime.datetime.now()
     
     def sendData(self, temperature,  airHumidity, soilMoisture, brightness):
         isLighting = int(aio.receive("islighting").value)
@@ -48,9 +50,22 @@ class IOT:
         print(lastDetectionTime)
         while True:
             detectionTime = aio.receive("detection").updated_at
-            timeDiff = lastDetectionTime - dateutil.parser.isoparse(detectionTime)
+            timeDetect = dateutil.parser.isoparse(detectionTime)
+            timeDiff = lastDetectionTime - timeDetect
             if timeDiff.seconds >= 2*60:
                 # do some notify
+                url = "http://127.0.0.1:8000/detection"
+
+                payload = json.dumps({
+                "time": "2023-03-02T14:38:48.509Z"
+                })
+                headers = {
+                'Content-Type': 'application/json'
+                }
+
+                response = requests.request("POST", url, headers=headers, data=payload)
+
+                print(response.text)
                 lastDetectionTime = dateutil.parser.isoparse(detectionTime)
 
     def setCondWater(self, temperature, airHumidity, soilMoisture, timeWater, type_):
