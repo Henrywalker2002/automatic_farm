@@ -10,7 +10,9 @@ import './Nhi.css';
 
 function InfoTable() {
     const iconStyle = { color: "#0FA958", height: "30px", width: "30px"};
-    const [data, setData] = useState();
+    const [data, setData] = useState(
+        {"temperature" : 30, "soilMoisture": 50, "airHumidity": 50}
+    );
     useEffect(() => {
         async function getData() { 
             var requestOptions = {
@@ -24,7 +26,6 @@ function InfoTable() {
         }
         getData()
     })
-    console.log(data)
     return (
         <Card className="stat">
           {/* <Card.Img variant="top" src="holder.js/100px180?text=Image cap" /> */}
