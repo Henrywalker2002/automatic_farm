@@ -92,12 +92,9 @@ class AutomaticFarm:
                 data = {"type" : type_, "isEveryday" : isEveryday, "date": date_obj, "timeWater" : timeWater,  
                 "temperature": temperature, "soilMoisture": soilMoisture, "airHumidity": airHumidity}
             elif type_ == 3:
-                startTime = shedule.startTime
-                endTime = shedule.endTime
                 brightness = shedule.brightness
-                self.iot.setCondBrightness(brightness, startTime, endTime)
-                data = {"type" : type_, "isEveryday" : isEveryday, "date": date_obj, "startTime": startTime, "endTime" : endTime, 
-                "brightness": brightness}
+                self.iot.setCondBrightness(brightness) 
+                data = {"type" : type_, "isEveryday" : isEveryday, "date": date_obj, "brightness": brightness}
             else:
                 startTime = shedule.startTime
                 endTime = shedule.endTime

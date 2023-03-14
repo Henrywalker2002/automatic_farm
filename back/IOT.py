@@ -72,10 +72,8 @@ class IOT:
         dataSend = str(temperature) + ':' + str(airHumidity) + ':' + str(soilMoisture) + ':' + str(timeWater) + ':' + str(type_)
         aio.send("allcond", dataSend)
         
-    def setCondBrightness(self, brightness, timeStart, timeEnd):
-        lst = [brightness, timeStart, timeEnd]
-        dataSend = ':'.join(lst)
-        aio.send("brightnessCond", dataSend)
+    def setCondBrightness(self, brightness):
+        aio.send("brightnessCond", brightness)
     
     def actionNow(self, type_ :str):
         aio.send("controlwork", type_)
