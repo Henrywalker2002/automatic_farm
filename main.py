@@ -227,16 +227,3 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-def apprun():
-    uvicorn.run(app, host="0.0.0.0", port=8000)
-
-if __name__ == "__main__":
-    p1 = multiprocessing.Process(target=AF.iot.collectData)
-    p2 = multiprocessing.Process(target=AF.iot.getDetection)
-    p3 = multiprocessing.Process(target=apprun)
-    p3.start()
-    p1.start()
-    p2.start()
-    p1.join()
-    p2.join()
-    p3.json()
