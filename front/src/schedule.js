@@ -43,7 +43,7 @@ function Condition() {
       <label id="labbel">
       <img src= {require('./fer.png')} alt="strawberry" id="img" />
       &#160; Fertilizer:     &#160;   &#160;
-      <input type="checkbox" id="topping" name="topping" value="Paneer" />
+      <input type="checkbox" id="topping" name="fertilize" />
       </label>
       </div>
     </div>
