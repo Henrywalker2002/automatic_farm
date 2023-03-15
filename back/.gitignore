@@ -2,3 +2,4 @@
 /build
 .space
 /.venv
+/__pycache__
