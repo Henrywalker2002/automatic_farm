@@ -25,7 +25,6 @@ function Condition() {
     <div id="c1">Schedule</div>
     <div id="c2">The last time you watered was </div>
     <div id="formC"> 
-        <form onSubmit={(e)=>submit(e)}>
       <label id="labbel">
       <img src= {require('./day.png')} alt="strawberry" id="img" />
       &#160; Everyday:  &#160; &#160;
@@ -47,7 +46,6 @@ function Condition() {
       <input type="checkbox" id="topping" name="topping" value="Paneer" />
       </label>
       </div>
-    </form>
     </div>
     
   </div>
