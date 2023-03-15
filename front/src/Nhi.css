@@ -1,0 +1,76 @@
+/* Title */
+h1{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: bolder;
+    font-size: 40px;
+    line-height: 20px;
+    color: #000000;
+}
+.header{
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    max-width: fit-content;
+    margin-top: 15px;
+}
+
+/* Tabs */
+.nav{
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+a.nav-link{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 100%;
+    /* identical to box height, or 26px */
+
+    letter-spacing: -0.04em;
+
+    /* Primaty/Grey Dark */
+
+    color: #757575;
+
+}
+a.nav-link:hover{
+    color: #229F27;
+}
+
+/* InfoTable */
+.stat.card{
+    padding: 20px 20px 32px;
+    gap: 20px;
+
+    position: absolute;
+    width: 400px;
+    height: 300px;
+
+    background: #FFFFFF;
+    box-shadow: 0px 22.8981px 45.7963px -11.4491px rgba(52, 41, 39, 0.08);
+    border-radius: 14px;
+
+    margin-left: 30px;
+}
+
+.badge.bg-success{
+    margin-left: 10px;
+}
+
+svg{
+    margin-right: 5px;
+}
+
+
+/* Chart */
+img{
+    height: 387px;
+    width: 622px;
+    left: 709px;
+    top: 358px;
+    border-radius: 14px;
+
+}
