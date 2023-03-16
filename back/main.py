@@ -7,6 +7,9 @@ from datetime import datetime
 from fastapi.middleware.cors import CORSMiddleware
 from IOT import IOT
 import multiprocessing
+import dateutil
+import dateutil.parser
+from dateutil import tz
 
 app = FastAPI()
 
@@ -139,7 +142,12 @@ class AutomaticFarm:
             res = []
             for row in rows:
                 row.pop('_id')
-                res.append(row)
+                temp = (row.get("time"))
+                from_zone = tz.gettz('UTC')
+                to_zone = tz.gettz('Asia/vietnam')
+                temp = temp.replace(tzinfo = from_zone)
+                temp = temp.astimezone(to_zone)
+                res.append({"time": (temp)})
             return {"result":"success", "message" : res}
         except Exception as e:
             return {"result" : "fail", "message" : str(e)}
@@ -213,7 +221,8 @@ async def actionNow(request: Request):
     return AF.actionNow(json.get("type_"), json.get("timeWater"))
 
 origins = [
-    "http://localhost:3000",
+    "http://localhost:3000", 
+    "*"
 ]
 
 app.add_middleware(
