@@ -29,10 +29,10 @@ function App() {
               
           </Routes>
           </Router> } */}
-          <Lightening />
+          {/* <Lightening /> */}
 
           {/* <Title /> */}
-          {/* { <Tabs /> } */}
+          { <Tabs /> }
           {/* {/* <MyNav /> */}
           */
             {/* <ul className="App-header">
