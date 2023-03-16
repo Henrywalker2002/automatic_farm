@@ -1,5 +1,6 @@
 FROM python:3.10.10-bullseye
 
+ADD okteto-stack.yaml /okteto-stack.yaml
 WORKDIR /app
 
 COPY requirements.txt requirements.txt

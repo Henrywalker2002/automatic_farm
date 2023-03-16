@@ -2,6 +2,9 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { BrowserRouter as Router, Route, Routes, Link} from "react-router-dom";
+import Tabs from './Tabs';
+import Lightening from './Lightening/Lightening';
 import './App.css';
 function MyNav() {
   return (
@@ -14,17 +17,22 @@ function MyNav() {
           <Nav className="me-auto" id="nav">
             <Nav.Link href="#home" >Home</Nav.Link>
             <Nav.Link href="#aboutus">About us</Nav.Link>
-            <NavDropdown title="Services" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1" id="drop">
-                {/* <img src= {require('./water.png')} alt="strawberry" id="smalllogo" /> */}
-                  Watering
+
+            
+              <NavDropdown title="Services" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="/water" id="drop">
+                    {/* <Link to ="/watering">Watering</Link> */}
+                    Watering
                   </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2" id="drop">
-                  Lightening
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3" id="drop">Intrusive Detection</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.4" id="drop">Reporting</NavDropdown.Item>
-            </NavDropdown>  
+                  <NavDropdown.Item href="/lighting" id="drop">
+                    Lightening
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.3" id="drop">Intrusive Detection</NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.4" id="drop">Reporting</NavDropdown.Item>  
+              </NavDropdown> 
+              
+            
+
             <Nav.Link href="#home" >Projects</Nav.Link>
             <Nav.Link href="#home" >Contact</Nav.Link>
             

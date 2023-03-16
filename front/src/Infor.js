@@ -14,7 +14,7 @@ function Setup() {
             <Chart/>
         </Col>
         <Col>
-        <InfoTable/>
+          <InfoTable/>
         </Col>
       </Row>
       
@@ -22,6 +22,7 @@ function Setup() {
     <div id="button_contain">
     <Button variant="Back" id="button">Back</Button>{' '}
     <Button variant="Save" id="button">Save</Button>{' '}
+    {/* <Button variant="WaterNow" id="button" type = "" onClick={waterNow}>Water Now</Button>{' '} */}
     </div>
     
   </div>
