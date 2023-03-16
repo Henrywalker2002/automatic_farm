@@ -92,12 +92,9 @@ class AutomaticFarm:
                 data = {"type" : type_, "isEveryday" : isEveryday, "date": date_obj, "timeWater" : timeWater,  
                 "temperature": temperature, "soilMoisture": soilMoisture, "airHumidity": airHumidity}
             elif type_ == 3:
-                startTime = shedule.startTime
-                endTime = shedule.endTime
                 brightness = shedule.brightness
-                self.iot.setCondBrightness(brightness, startTime, endTime)
-                data = {"type" : type_, "isEveryday" : isEveryday, "date": date_obj, "startTime": startTime, "endTime" : endTime, 
-                "brightness": brightness}
+                self.iot.setCondBrightness(brightness) 
+                data = {"type" : type_, "isEveryday" : isEveryday, "date": date_obj, "brightness": brightness}
             else:
                 startTime = shedule.startTime
                 endTime = shedule.endTime
@@ -227,16 +224,3 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-def apprun():
-    uvicorn.run(app, host="0.0.0.0", port=8000)
-
-if __name__ == "__main__":
-    p1 = multiprocessing.Process(target=AF.iot.collectData)
-    p2 = multiprocessing.Process(target=AF.iot.getDetection)
-    p3 = multiprocessing.Process(target=apprun)
-    p3.start()
-    p1.start()
-    p2.start()
-    p1.join()
-    p2.join()
-    p3.json()

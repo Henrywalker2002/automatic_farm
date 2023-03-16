@@ -40,6 +40,27 @@ a.nav-link:hover{
     color: #229F27;
 }
 
+a {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 100%;
+    /* identical to box height, or 26px */
+
+    letter-spacing: -0.04em;
+
+    /* Primaty/Grey Dark */
+
+    color: #757575;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+a {
+    color: #229F27;
+}
+
 /* InfoTable */
 .stat.card{
     padding: 20px 20px 32px;

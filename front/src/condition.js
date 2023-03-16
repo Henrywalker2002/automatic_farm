@@ -31,27 +31,25 @@ function Condition() {
     <div id="c1">Conditions</div>
     <div id="c2">The last time you watered was </div>
     <div id="formC"> 
-        <form onSubmit={(e)=>submit(e)}>
-      <label id="labbel">
-      <img src= {require('./tem.png')} alt="strawberry" id="img" />
-      &#160; Temperature  &#160;  &#62;
-        <input onChange={(e)=>handle(e)} value={data.temperature} type="number" name="tem" id="in" />
-      </label>
-      <div>
-      <label id="labbel">
-      <img src= {require('./soil.png')} alt="strawberry" id="img" />
-      &#160; Soil moisture  &#160;   &#60;
-        <input onChange={(e)=>handle(e)} value={data.soilMoisture}  type="number" name="soil" id="in" />
-      </label>
-      </div>
-      <div>
-      <label id="labbel">
-      <img src= {require('./air.png')} alt="strawberry" id="img" />
-      &#160; Air humidity     &#160;   &#62;
-        <input onChange={(e)=>handle(e)} value={data.airHumidity} type="number" name="air" id="in" />
-      </label>
-      </div>
-    </form>
+          <label id="labbel">
+          <img src= {require('./tem.png')} alt="strawberry" id="img" />
+          &#160; Temperature  &#160;  &#62;
+            <input onChange={(e)=>handle(e)} value={data.temperature} type="number" name="tem" id="in" />
+          </label>
+          <div>
+          <label id="labbel">
+          <img src= {require('./soil.png')} alt="strawberry" id="img" />
+          &#160; Soil moisture  &#160;   &#60;
+            <input onChange={(e)=>handle(e)} value={data.soilMoisture}  type="number" name="soil" id="in" />
+          </label>
+          </div>
+          <div>
+            <label id="labbel">
+            <img src= {require('./air.png')} alt="strawberry" id="img" />
+            &#160; Air humidity     &#160;   &#62;
+              <input onChange={(e)=>handle(e)} value={data.airHumidity} type="number" name="air" id="in" />
+            </label>
+          </div>
     </div>
     
   </div>
