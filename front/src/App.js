@@ -6,26 +6,35 @@ import MyNav from './MyNav';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import React from 'react';
 import Tabs from './Tabs';
-import Title from './Title';
+// import Title from './Title';
 // import InfoTable from './Components/InfoTable';
 // import Chart from './Components/Chart';
 // import Condition from './condition';
-import Setup from './setup';
-import Infor from './Infor';
+import Title from './Lightening/Title';
+import Setup from './Lightening/Setup';
+import Info from './Lightening/Info';
 import './App.css';
+import Lightening from './Lightening/Lightening';
 // import { Route, Routes } from 'react-router-dom';
 // // import navM from './MyNav'
 // import MyNav from './MyNav';
 function App() {
   return (
         <div className = "app">
+          {/* { <Router>
           <MyNav />
-          <Title />
-          <Tabs />
-          {/* <MyNav />
-          <Title/>
-          <Tabs/>
-          <Setup/> */}
+          <Routes>
+            <Route exact path='/lightening' element= {<Lightening/>}/>
+              
+              
+          </Routes>
+          </Router> } */}
+          <Lightening />
+
+          {/* <Title /> */}
+          {/* { <Tabs /> } */}
+          {/* {/* <MyNav /> */}
+          */
             {/* <ul className="App-header">
               <li>
                 <Link to="/">Home</Link>
