@@ -14,7 +14,7 @@ function Setup() {
             <Chart/>
         </Col>
         <Col>
-        <InfoTable/>
+          <InfoTable/>
         </Col>
       </Row>
       

@@ -6,20 +6,19 @@ import { BrowserRouter as Router, Route, Routes, Link} from "react-router-dom";
 
 function Lightening() {
     return (
-      <Router>
+
       <Nav className = "nav">
         <Nav.Item>
-          <Link to ="/Lightening/infor">Information</Link>
+          <Link to ="/lightinfor">Information</Link>
         </Nav.Item>
         <Nav.Item>
-          <Link to ="/Lightening/setup">Set up</Link>
+          <Link to ="/lightsetup">Set up</Link>
         </Nav.Item>
+        <Routes>
+          <Route path = '/lighting/infor' element = {<Info />} />
+        </Routes>
       </Nav>
-      <Routes>
-          <Route exact path='/Lightening/infor' element={<Info/>} />
-          <Route exact path='/Lightening/setup' element={<Setup/>} />
-      </Routes>
-      </Router>
+
   
     );
   }
