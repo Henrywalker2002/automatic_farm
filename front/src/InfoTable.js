@@ -13,19 +13,25 @@ function InfoTable() {
     const [data, setData] = useState(
         {"temperature" : 30, "soilMoisture": 50, "airHumidity": 50}
     );
+    async function getData() { 
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+        
+        const res = await fetch("http://127.0.0.1:8000/getData", requestOptions);
+        const response = await res.json()
+        setData(response.message)
+        console.log(response)
+    }
     useEffect(() => {
-        async function getData() { 
-            var requestOptions = {
-                method: 'GET',
-                redirect: 'follow'
-            };
-            
-            const res = await fetch("http://127.0.0.1:8000/getData", requestOptions);
-            const response = await res.json()
-            setData(response.message)
-        }
         getData()
     }, [])
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> dba70cfa731adfea9cee56b931c47a0b32632567
     return (
         <Card className="stat">
           {/* <Card.Img variant="top" src="holder.js/100px180?text=Image cap" /> */}

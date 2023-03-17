@@ -8,6 +8,7 @@ import multiprocessing
 import pytz
 import json
 import requests
+from dateutil import tz
 
 AIO_FEED_ID = "dataCollection"
 AIO_USERNAME = "kimquynh1304"
@@ -49,31 +50,33 @@ class IOT:
         lastDetectionTime = dateutil.parser.isoparse(detectionTime)
         print(lastDetectionTime)
         while True:
-            detectionTime = aio.receive("detection").updated_at
+            detectionTime = aio.receive("detection").created_at
             timeDetect = dateutil.parser.isoparse(detectionTime)
             timeDiff = lastDetectionTime - timeDetect
             if timeDiff.seconds >= 2*60:
+                from_zone = tz.gettz('UTC')
+                to_zone = tz.gettz('Asia/vietnam')
+                timeDetect = timeDetect.replace(tzinfo = from_zone)
+                timeDetect = timeDetect.astimezone(to_zone)
                 # do some notify
                 url = "http://127.0.0.1:8000/detection"
 
                 payload = json.dumps({
-                "time": "2023-03-02T14:38:48.509Z"
+                "time": str(timeDetect)
                 })
                 headers = {
                 'Content-Type': 'application/json'
                 }
 
                 response = requests.request("POST", url, headers=headers, data=payload)
-
-                print(response.text)
-                lastDetectionTime = dateutil.parser.isoparse(detectionTime)
+                lastDetectionTime = timeDetect
 
     def setCondWater(self, temperature, airHumidity, soilMoisture, timeWater, type_):
-        dataSend = str(temperature) + ':' + str(airHumidity) + ':' + str(soilMoisture) + ':' + str(timeWater) + ':' + str(type_)
+        dataSend = str(int(temperature)) + ':' + str(int(airHumidity)) + ':' + str(int(soilMoisture)) + ':' + str(int(timeWater)) + ':' + str(type_)
         aio.send("allcond", dataSend)
         
     def setCondBrightness(self, brightness):
-        aio.send("brightnessCond", brightness)
+        aio.send("brightnesscond", int(brightness))
     
     def actionNow(self, type_ :str):
         aio.send("controlwork", type_)
