@@ -12,6 +12,9 @@ import axios from 'axios';
 import Chart from './Chart';
 import InfoTable from './InfoTable';
 import './App.css';
+import Title from './Title';
+import Tabs from './Tabs';
+// import { Tabs } from '@material-ui/core';
 function Setup() {
   const [open, setOpen] = React.useState(false);
   
@@ -55,13 +58,14 @@ function Setup() {
   }
   return (
   <div>
+    <Tabs/>
     <Container>
       <Row id="contain_setup">
         <Col>
-            <Chart/>
+            <InfoTable/>
         </Col>
         <Col>
-        <InfoTable/>
+        <Chart/>
         </Col>
       </Row>
       

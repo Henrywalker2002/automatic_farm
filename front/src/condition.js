@@ -3,6 +3,7 @@
 // import Navbar from 'react-bootstrap/Navbar';
 // import NavDropdown from 'react-bootstrap/NavDropdown';
 import React, {  useState } from 'react';
+import Tabs from './Tabs'
 import Axios from 'axios';
 import './App.css';
 function Condition() {

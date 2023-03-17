@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Chart from '../Chart';
 import InfoTable from './InfoTable';
+import Lightening from './Lightening';
 import axios from 'axios';
 import './App.css';
 
@@ -37,6 +38,7 @@ function Info() {
 
     return (
         <div>
+          <Lightening/>
           <Container>
             <Row id="contain_setup">
               <Col>

@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Condition from './condition';
 import Schedule from './schedule';
 import axios from 'axios';
+import Tabs from './Tabs'
 import './App.css';
 
 function Setup() {
@@ -95,6 +96,7 @@ function Setup() {
   return (
 
   <div>
+    <Tabs />
     <form id = "setupCond" onSubmit={handleData} >
     <Container>
       <Row id="contain_setup">

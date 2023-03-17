@@ -20,12 +20,11 @@ function MyNav() {
 
             
               <NavDropdown title="Services" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#" id="drop">
+                  <NavDropdown.Item href="/water" id="drop">
                     {/* <Link to ="/watering">Watering</Link> */}
                     Watering
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="#" id="drop">
-                    <Link to ="/lightening">Lightening</Link>
+                  <NavDropdown.Item href="/lighting" id="drop">
                     Lightening
                   </NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.3" id="drop">Intrusive Detection</NavDropdown.Item>
