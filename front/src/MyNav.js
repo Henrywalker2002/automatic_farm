@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { BrowserRouter as Router, Route, Routes, Link} from "react-router-dom";
-import Tabs from './Tabs';
+import Tabs from './Watering/Watering';
 import Lightening from './Lightening/Lightening';
 import './App.css';
 function MyNav() {
@@ -24,7 +24,7 @@ function MyNav() {
                     {/* <Link to ="/watering">Watering</Link> */}
                     Watering
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="/lighting" id="drop">
+                  <NavDropdown.Item href="/light" id="drop">
                     Lightening
                   </NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.3" id="drop">Intrusive Detection</NavDropdown.Item>

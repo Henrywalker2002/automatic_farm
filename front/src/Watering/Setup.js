@@ -5,8 +5,8 @@ import Button from 'react-bootstrap/Button';
 import Condition from './condition';
 import Schedule from './schedule';
 import axios from 'axios';
-import Tabs from './Tabs'
-import './App.css';
+import Tabs from './Watering'
+import '../App.css';
 
 function Setup() {
   function helper(str) {

@@ -6,7 +6,7 @@ import {FaTemperatureHigh} from "react-icons/fa";
 import {TbWashTemperature5} from "react-icons/tb";
 import {WiHumidity} from "react-icons/wi";
 import {RiCelsiusFill} from "react-icons/ri";
-import './Nhi.css';
+import '../Nhi.css';
 
 function InfoTable() {
     const iconStyle = { color: "#0FA958", height: "30px", width: "30px"};
@@ -27,11 +27,6 @@ function InfoTable() {
     useEffect(() => {
         getData()
     }, [])
-<<<<<<< HEAD
-=======
-
-
->>>>>>> dba70cfa731adfea9cee56b931c47a0b32632567
     return (
         <Card className="stat">
           {/* <Card.Img variant="top" src="holder.js/100px180?text=Image cap" /> */}

@@ -11,11 +11,11 @@ import Dialog from '@material-ui/core/Dialog';
 import axios from 'axios';
 import Chart from './Chart';
 import InfoTable from './InfoTable';
-import './App.css';
+import '../App.css';
 import Title from './Title';
-import Tabs from './Tabs';
+import Tabs from './Watering';
 // import { Tabs } from '@material-ui/core';
-function Setup() {
+function Info() {
   const [open, setOpen] = React.useState(false);
   
   const handleClickOpen = () => {
@@ -99,4 +99,4 @@ function Setup() {
   );
 }
 
-export default Setup;
+export default Info;

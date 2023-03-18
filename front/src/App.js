@@ -5,18 +5,19 @@ import MyNav from './MyNav';
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import React from 'react';
-import Tabs from './Tabs';
+
 // import Title from './Title';
 // import InfoTable from './Components/InfoTable';
 // import Chart from './Components/Chart';
 // import Condition from './condition';
-import Title from './Lightening/Title';
 import SetupLight from './Lightening/Setup';
-import Setup from './setup';
-import Info from './Lightening/Info';
-import Infor from "./Infor"
-import './App.css';
+import InfoLight from './Lightening/Info';
 import Lightening from './Lightening/Lightening';
+import Watering from './Watering/Watering';
+import InfoWater from "./Watering/Info";
+import SetupWater from './Watering/Setup';
+import './App.css';
+
 // import { Route, Routes } from 'react-router-dom';
 // // import navM from './MyNav'
 // import MyNav from './MyNav';
@@ -26,13 +27,13 @@ function App() {
           <MyNav />
           <Router>
             <Routes>
-              <Route exact path='water/infor' element={ <Infor/>} />
-              <Route exact path='water/setup' element={< Setup/>} />
-              <Route path='/setup' element={< Setup/>} />
-              <Route path = '/lighting/' element = {< Lightening/>} />
-              <Route path = '/light/infor' element = {<Info />} />
+              <Route exact path='water/infor' element={ <InfoWater/>} />
+              <Route exact path='water/setup' element={< SetupWater/>} />
+              {/* <Route path='/setup' element={< Setup/>} /> */}
+              <Route path = '/light' element = {< Lightening/>} />
+              <Route path = '/light/infor' element = {<InfoLight />} />
               <Route path = '/light/setup' element = {<SetupLight />} />
-              <Route path='/water' element = {<Tabs />} />
+              <Route path='/water' element = {<Watering />} />
             </Routes>
           </Router>
         </div>

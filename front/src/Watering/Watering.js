@@ -1,13 +1,12 @@
 import React, {createContext} from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Title from './Title';
-import Infor from "./Infor"
-import Setup from './setup';
-import Lightening from './Lightening/Lightening'
+import Infor from "./Info"
+import Setup from './Setup';
 import { BrowserRouter as Router, Route, Routes, Link} from "react-router-dom";
-import './Nhi.css';
+import '../Nhi.css';
 
-function Tabs() {
+function Watering() {
   return (
     <div>
       <Title/>
@@ -24,4 +23,4 @@ function Tabs() {
   );
 }
 
-export default Tabs;
+export default Watering;
