@@ -1,7 +1,7 @@
 import React from 'react';
 // import { Icon } from '@iconify/react';
 import { GiPlantWatering } from "react-icons/gi";
-import './Nhi.css';
+import '../Nhi.css';
 
 function Title() {
     const PlantWateringStyle = { color: "#229F27"};

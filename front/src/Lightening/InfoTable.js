@@ -25,7 +25,7 @@ function InfoTable() {
             setData(response.message)
         }
         getData()
-    })
+    },[])
     return (
         <Card className="stat">
           {/* <Card.Img variant="top" src="holder.js/100px180?text=Image cap" /> */}

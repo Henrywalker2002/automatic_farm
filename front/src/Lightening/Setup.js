@@ -6,8 +6,9 @@ import Condition from './Condition';
 import Schedule from './Schedule';
 import axios from 'axios';
 import './App.css';
+import Lightening from './Lightening';
 
-function Setup() {
+function SetupLight() {
   function helper(str) {
     if (str.length === 1) {
       return '0' + str
@@ -70,6 +71,7 @@ function Setup() {
   return (
 
   <div>
+    <Lightening/>
     <form id = "setupCond" onSubmit={handleData} >
     <Container>
       <Row id="contain_setup">
@@ -93,4 +95,4 @@ function Setup() {
   );
 }
 
-export default Setup;
+export default SetupLight;

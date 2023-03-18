@@ -6,26 +6,27 @@ import {FaTemperatureHigh} from "react-icons/fa";
 import {TbWashTemperature5} from "react-icons/tb";
 import {WiHumidity} from "react-icons/wi";
 import {RiCelsiusFill} from "react-icons/ri";
-import './Nhi.css';
+import '../Nhi.css';
 
 function InfoTable() {
     const iconStyle = { color: "#0FA958", height: "30px", width: "30px"};
     const [data, setData] = useState(
         {"temperature" : 30, "soilMoisture": 50, "airHumidity": 50}
     );
+    async function getData() { 
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+        
+        const res = await fetch("http://127.0.0.1:8000/getData", requestOptions);
+        const response = await res.json()
+        setData(response.message)
+        console.log(response)
+    }
     useEffect(() => {
-        async function getData() { 
-            var requestOptions = {
-                method: 'GET',
-                redirect: 'follow'
-            };
-            
-            const res = await fetch("http://127.0.0.1:8000/getData", requestOptions);
-            const response = await res.json()
-            setData(response.message)
-        }
         getData()
-    })
+    }, [])
     return (
         <Card className="stat">
           {/* <Card.Img variant="top" src="holder.js/100px180?text=Image cap" /> */}
