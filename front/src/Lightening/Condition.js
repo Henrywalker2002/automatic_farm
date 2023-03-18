@@ -9,16 +9,12 @@ import './App.css';
 function Condition() {
   const url="http://127.0.0.1:8000/schedule";
   const [data,setData]=useState({
-    tem:0,
-    soil:0,
-    air:0
+    brightness:0
   })
   function submit(e){
     e.preventDefaul();
     Axios.post(url, {
-    tem: data.temperature,
-    soil:data.soilMoisture,
-    air: data.airHumidity
+      brightness:data.brightness
     })
   }
   function handle(e){
@@ -35,7 +31,7 @@ function Condition() {
           <label id="labbel">
           <MdLight className='icon'/>
           &#160; Brightness  &#160;  &#60;
-            <input onChange={(e)=>handle(e)} value={data.temperature} type="number" name="tem" id="in" />
+            <input onChange={(e)=>handle(e)} value={data.brightness} type="number" name="brightness" id="in" />
           </label>
     </div>
     

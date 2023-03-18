@@ -15,23 +15,32 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import Dialog from '@material-ui/core/Dialog';
 
 function Info() {
+  var isOn = 2
   const [open, setOpen] = React.useState(false);
-  
   const handleClickOpen = () => {
     setOpen(true);
   };
-  
   const handleClose = () => {
     setOpen(false);
   };
+  function handle(e){
+    const newdata={...open}
+    newdata[e.target.name]=e.target.value
+    // setOpen(newdata)
+    isOn = parseInt(newdata.isOn)
+    console.log(isOn)
+  }
   async function waterNow(event) {
     event.preventDefault()
-    var time = parseInt(event.target.water.value)
+    // var time = parseInt(event.target.time.value)
+    var flag=0
+    if (isOn){
+      flag=1
+    }
     var data = JSON.stringify({
-      "type_": 1,
-      "timeWater": time
+      "type_": 3,
+      "flag": flag
     });
-    // handleClose()
     var config = {
       method: 'post',
     maxBodyLength: Infinity,
@@ -42,11 +51,11 @@ function Info() {
       data : data
      
     };
-    
     var res = await axios(config)
     var json = await res.data
     if (json.result === "success") {
       // window.location.reload()
+      console.log(json.result)
       handleClose()
     }
     else {
@@ -78,7 +87,8 @@ function Info() {
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-          <input  type="number" name="water" id="in" />
+          {/* <input onChange={(e)=>handle(e)}  type="number" name="time" id="in" /> */}
+          <input onChange={(e)=>handle(e)}  type="checkbox" id="topping" name="isOn"  />
           {/* onChange={(e)=>handle(e)} value={data.brightness} */}
           </DialogContentText>
         </DialogContent>

@@ -16,6 +16,9 @@ import Title from './Title';
 import Tabs from './Watering';
 // import { Tabs } from '@material-ui/core';
 function Info() {
+
+  var time = 2
+
   const [open, setOpen] = React.useState(false);
   
   const handleClickOpen = () => {
@@ -25,14 +28,20 @@ function Info() {
   const handleClose = () => {
     setOpen(false);
   };
-
+  function handle(e){
+    const newdata={...open}
+    newdata[e.target.name]=e.target.value
+    // setOpen(newdata)
+    time = parseInt(newdata.time)
+    console.log(time)
+  }
   async function waterNow(event) {
     event.preventDefault()
-    var time = parseInt(event.target.water.value)
     var data = JSON.stringify({
       "type_": 1,
       "timeWater": time
     });
+
     // handleClose()
     var config = {
       method: 'post',
@@ -44,11 +53,11 @@ function Info() {
       data : data
      
     };
-    
     var res = await axios(config)
     var json = await res.data
     if (json.result === "success") {
       // window.location.reload()
+      console.log(json.result)
       handleClose()
     }
     else {
@@ -76,11 +85,12 @@ function Info() {
     <Button variant="WaterNow" id="button" type = ""  onClick={handleClickOpen}>Water Now</Button>{' '}
     <Dialog open={open} onClose={handleClose}>
         <DialogTitle>
-           How long do you want to set?
+           Do you want to turn on or turn off light ? 
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-          <input  type="number" name="water" id="in" />
+          <input onChange={(e)=>handle(e)} type="number" name="time" id="in" />
+          {/* <input  type="number" name="time" id="in" /> */}
           {/* onChange={(e)=>handle(e)} value={data.brightness} */}
           </DialogContentText>
         </DialogContent>
