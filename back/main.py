@@ -55,12 +55,13 @@ class AutomaticFarm:
         except Exception as e:
             return {"result" : "fail", "message": str(e)}
     
-    def sendData(self, time, temperature, airHumidity, soilMoisture, brightness, isWatering, isFertilizing, lastTimeWater, lasttimeFertilize):
+    def sendData(self, data : DataCollection):
         try :
-            data = {"time":time ,"temperature":temperature ,"airHumidity":airHumidity ,"soilMoisture":soilMoisture ,
-                    "brightness":brightness ,"isWatering":isWatering ,"isFertilizing":isFertilizing ,"lastTimeWater":lastTimeWater ,
-                    "lastTimeFertilize":lasttimeFertilize}
+            data = {"time":data.time ,"temperature":data.temperature ,"airHumidity":data.airHumidity ,"soilMoisture":data.soilMoisture ,
+                    "brightness":data.brightness ,"isWatering":data.isWatering ,"isFertilizing":data.isFertilizing ,
+                    "lastTimeWater":data.lastTimeWater ,"lastTimeFertilize":data.lasttimeFertilize}
             self.dataColl.insert_one(data)
+            return {"result" : "success"}
         except Exception as e:
             return {"result" : "fail", "message": str(e)}      
     
@@ -131,7 +132,7 @@ class AutomaticFarm:
                 light = self.shedule.find_one({"type" : 3, "isEveryday": True})
             if water is not None: water.pop("_id")
             if fertilize is not None : fertilize.pop("_id")
-            if light is not None : light.fertilize("_id")
+            if light is not None : light.pop("_id")
             return {"result": "success", "message": [water, fertilize, light]}
         except Exception as e:
             return {"result" : "fail", "message" : str(e)}
@@ -208,9 +209,9 @@ async def addDetect(detect: Detection):
 async def getDetect():
     return AF.getDetection()
 
-@app.get("/sendData")
-async def sendData(time, temperature, airHumidity, soilMoisture, brightness, isWatering, isFertilizing, lastTimeWater, lastTimeFertilize):
-    return AF.sendData(time, temperature, airHumidity, soilMoisture, brightness, isWatering, isFertilizing, lastTimeWater, lastTimeFertilize)
+@app.post("/sendData")
+async def sendData(data : DataCollection):
+    return AF.sendData(data)
 
 @app.post("/actionNow")
 async def actionNow(request: Request):
@@ -233,3 +234,4 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# uvicorn.run(app, host= "0.0.0.0", port= 8000)

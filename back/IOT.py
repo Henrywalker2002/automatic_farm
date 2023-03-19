@@ -25,8 +25,34 @@ class IOT:
             dataCollection = aio.receive("datacollection").value
             templst = dataCollection.split(':')
             temperature, airHumidity, soilMoisture, brightness = templst[0], templst[1], templst[2], templst[3]
+            isFertilize = bool(aio.receive("isfertilizing").value)
+            isLighting = bool(aio.receive("islighting").value)
+            isWatering = bool(aio.receive("iswatering").value)
+            lasttimefertilize = dateutil.parser.isoparse(aio.receive("lasttimefertilize").updated_at)
+            lasttimewater = dateutil.parser.isoparse(aio.receive("lasttimewater").updated_at)
             print(templst)
             timeCollect = datetime.datetime.now()
+            url = "http://127.0.0.1:8000/sendData"
+
+            payload = json.dumps({
+                "time": str(timeCollect),
+                "temperature": temperature,
+                "airHumidity": airHumidity,
+                "soilMoisture": soilMoisture,
+                "brightness": brightness,
+                "isWatering": isWatering,
+                "isLighting": isLighting,
+                "isFertilizing": isFertilize,
+                "lastTimeWater": str(lasttimewater),
+                "lasttimeFertilize": str(lasttimefertilize)
+            })
+            headers = {
+            'Content-Type': 'application/json'
+            }
+
+            response = requests.request("POST", url, headers=headers, data=payload)
+
+            print(response.text)
             time.sleep(600)
         # while True:
         #     timeDiff = datetime.datetime.now() - timeCollect

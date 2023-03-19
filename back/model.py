@@ -17,7 +17,7 @@ class DataCollection(BaseModel):
     isWatering : bool 
     isLighting : bool 
     isFertilizing: bool 
-    lastTimeWater : datetime 
+    lastTimeWater : datetime
     lasttimeFertilize: datetime 
 
 class Schedule(BaseModel):

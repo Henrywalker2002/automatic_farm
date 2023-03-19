@@ -85,7 +85,7 @@ function Info() {
     <Button variant="WaterNow" id="button" type = ""  onClick={handleClickOpen}>Water Now</Button>{' '}
     <Dialog open={open} onClose={handleClose}>
         <DialogTitle>
-           Do you want to turn on or turn off light ? 
+            How long do you want to set ? 
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
