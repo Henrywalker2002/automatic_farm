@@ -1,8 +1,10 @@
 import React, {  useState } from 'react';
 import Axios from 'axios';
 import './App.css';
+
+const host = "http://103.77.173.109:8000/"
 function Condition() {
-  const url="http://127.0.0.1:8000/schedule";
+  const url= host+ "schedule";
   const [data,setData]=useState({
     isEday:false,
     time:0

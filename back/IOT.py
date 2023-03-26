@@ -12,7 +12,7 @@ from dateutil import tz
 
 AIO_FEED_ID = "dataCollection"
 AIO_USERNAME = "kimquynh1304"
-AIO_KEY = "aio_xdiT7471J0EKVTYVcLwB08kupmIg"
+AIO_KEY = "aio_iYSq87jFjmf5oAMXkWmlan5eOcNK"
 
 aio = Client(AIO_USERNAME ,AIO_KEY)
 

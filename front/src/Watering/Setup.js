@@ -8,6 +8,8 @@ import axios from 'axios';
 import Tabs from './Watering'
 import '../App.css';
 
+const host = "http://103.77.173.109:8000/"
+
 function Setup() {
   function helper(str) {
     if (str.length === 1) {
@@ -26,7 +28,7 @@ function Setup() {
     var config = {
       method: 'post',
     maxBodyLength: Infinity,
-      url: 'http://127.0.0.1:8000/actionNow',
+      url: host + 'actionNow',
       headers: { 
         'Content-Type': 'application/json'
       },
@@ -79,7 +81,7 @@ function Setup() {
     var config = {
       method: 'post',
     maxBodyLength: Infinity,
-      url: 'http://127.0.0.1:8000/schedule',
+      url: host + '/schedule',
       headers: { 
         'Content-Type': 'application/json'
       },
@@ -89,6 +91,7 @@ function Setup() {
     var res = await axios(config)
     var json = await res.data
     if (json.result === "success") {
+      // thong bao thanh cong
       window.location.reload()
     }
   }

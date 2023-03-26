@@ -8,6 +8,8 @@ import {WiHumidity} from "react-icons/wi";
 import {RiCelsiusFill} from "react-icons/ri";
 import '../Nhi.css';
 
+const host = "http://103.77.173.109:8000/"
+
 function InfoTable() {
     const iconStyle = { color: "#0FA958", height: "30px", width: "30px"};
     const [data, setData] = useState(
@@ -19,7 +21,7 @@ function InfoTable() {
             redirect: 'follow'
         };
         
-        const res = await fetch("http://127.0.0.1:8000/getData", requestOptions);
+        const res = await fetch(host + "getData", requestOptions);
         const response = await res.json()
         setData(response.message)
         console.log(response)

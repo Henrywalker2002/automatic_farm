@@ -1,0 +1,14 @@
+services:
+  api:
+    image: e1791f01013b
+    build: .
+    ports:
+      - 8000:8000
+
+  reactjs:
+    image: 73165ba37677
+    build: .
+    ports:
+      - 3000:3000
+    depends_on:
+      - api
