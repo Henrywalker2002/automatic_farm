@@ -7,12 +7,14 @@ import InfoTable from './InfoTable';
 import Lightening from './Lightening';
 import axios from 'axios';
 import './App.css';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Dialog from '@material-ui/core/Dialog';
+
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 function Info() {
   var isOn = 2
@@ -30,6 +32,49 @@ function Info() {
     isOn = parseInt(newdata.isOn)
     console.log(isOn)
   }
+
+  const [data, setData] = useState([])
+
+  async function getData() {
+    var requestOptions = {
+      method: 'GET',
+      redirect: 'follow'
+    };
+    
+    const res = await fetch("http://127.0.0.1:8000/getAllData", requestOptions)
+    const json = await res.json()
+    if (json.result === "success") {
+      setData(json.message)
+    }
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
+
+  var char = (
+    <LineChart
+      width={500}
+      height={300}
+      data={data}
+      margin={{
+        top: 5,
+        right: 30,
+        left: 20,
+        bottom: 5,
+      }}
+    >
+
+    <XAxis dataKey="time" />
+    <YAxis />
+    <Tooltip />
+    <Legend />
+
+    <Line type="monotone" dataKey="brightness" stroke="#229F27" activeDot={{ r: 8 }} />
+    </LineChart>
+  )
+
   async function waterNow(event) {
     event.preventDefault()
     // var time = parseInt(event.target.time.value)
@@ -72,12 +117,14 @@ function Info() {
               <Col>
                   <InfoTable/>
               </Col>
-              <Col>
-                    <Chart/>
+              <Col> 
+                    <h3>Brightness Chart</h3>
+                    {char}
               </Col>
             </Row>
             
           </Container>
+
           <div id="button_contain">
           <Button variant="Back" id="button">Back</Button>{' '}
           <Button variant="WaterNow" id="button" type = "" onClick={handleClickOpen}>Lightening Now</Button>{' '}
@@ -102,7 +149,6 @@ function Info() {
         </DialogActions>
       </Dialog>
           </div>
-          
         </div>
     );
 }

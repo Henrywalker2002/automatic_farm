@@ -270,4 +270,8 @@
     height: 25px;
     width: 25px;
   }
+
+.col {
+  text-align: center;
+}
   

@@ -28,7 +28,7 @@ function MyNav() {
                     Lightening
                   </NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.3" id="drop">Intrusive Detection</NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.4" id="drop">Reporting</NavDropdown.Item>  
+                  <NavDropdown.Item href="/report" id="drop">Reporting</NavDropdown.Item>  
               </NavDropdown> 
               
             

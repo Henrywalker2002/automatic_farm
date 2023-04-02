@@ -14,6 +14,8 @@ import InfoTable from './InfoTable';
 import '../App.css';
 import Title from './Title';
 import Tabs from './Watering';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { useState, useEffect } from 'react';
 // import { Tabs } from '@material-ui/core';
 
 const host = "http://103.77.173.109:8000/"
@@ -67,6 +69,52 @@ function Info() {
     }
     
   }
+
+  const [data, setData] = useState([])
+
+  async function getData() {
+    var requestOptions = {
+      method: 'GET',
+      redirect: 'follow'
+    };
+    
+    const res = await fetch("http://127.0.0.1:8000/getAllData", requestOptions)
+    const json = await res.json()
+    if (json.result === "success") {
+      setData(json.message)
+    }
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
+
+  var chart = (
+    <LineChart
+      width={500}
+      height={300}
+      data={data}
+      margin={{
+        top: 5,
+        right: 30,
+        left: 20,
+        bottom: 5,
+      }}
+    >
+
+    <XAxis dataKey="time" />
+    <YAxis />
+    <Tooltip />
+    <Legend />
+
+    <Line type="monotone" dataKey="temperature" stroke="#1CFC25 " activeDot={{ r: 8 }} />
+    <Line type="monotone" dataKey="soilMoisture" stroke="#75E37A" activeDot={{ r: 8 }} />
+    <Line type="monotone" dataKey="airHumidity" stroke="#229F27" activeDot={{ r: 8 }} />
+    
+    </LineChart>
+  )
+
   return (
   <div>
     <Tabs/>
@@ -76,7 +124,8 @@ function Info() {
             <InfoTable/>
         </Col>
         <Col>
-        <Chart/>
+          <h3>Temp and Humidity Chart</h3>
+          {chart}
         </Col>
       </Row>
       

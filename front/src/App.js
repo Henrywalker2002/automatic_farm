@@ -17,11 +17,17 @@ import Watering from './Watering/Watering';
 import InfoWater from "./Watering/Info";
 import SetupWater from './Watering/Setup';
 import './App.css';
+import { useCookies } from 'react-cookie';
+import Report from './Report/Report';
 
 // import { Route, Routes } from 'react-router-dom';
 // // import navM from './MyNav'
 // import MyNav from './MyNav';
 function App() {
+  const [cookies, setCookie, removeCookie] = useCookies(['name']);
+  if (cookies.name) {
+    console.log(123)
+  }
   return (
         <div className = "app">
           <MyNav />
@@ -34,6 +40,7 @@ function App() {
               <Route path = '/light/infor' element = {<InfoLight />} />
               <Route path = '/light/setup' element = {<SetupLight />} />
               <Route path='/water' element = {<Watering />} />
+              <Route path='/report' element = {<Report />} />
             </Routes>
           </Router>
         </div>

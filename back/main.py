@@ -74,6 +74,31 @@ class AutomaticFarm:
         except Exception as e:
             return {"result" : "fail", "message" : str(e)}
     
+    def getAllData(self):
+        try:
+            rows = self.dataColl.aggregate([{
+                '$group' : {
+                    "_id" : {"$dateToString" : {"format": "%Y-%m-%d", "date": "$time"}},
+                    "brightness" : { "$avg" : "$brightness" },
+                    "temperature" : { "$avg" : "$temperature" },
+                    "soilMoisture" : { "$avg" : "$soilMoisture" },
+                    "airHumidity" : { "$avg" : "$airHumidity" }
+                }
+            }, 
+            {"$sort": {"_id": 1}}, 
+            {"$addFields" : {"brightness" : {"$round" : ['$brightness', 1]}}},
+            {"$addFields" : {"temperature" : {"$round" : ['$temperature', 1]}}},
+            {"$addFields" : {"soilMoisture" : {"$round" : ['$soilMoisture', 1]}}},
+            {"$addFields" : {"airHumidity" : {"$round" : ['$airHumidity', 1]}}}
+            ])
+            res = []
+            for row in rows:
+                row['time'] = row.pop('_id')
+                res.append(row)
+            return {"result": "success", "message" : res}
+        except Exception as e:
+            return {"result" : "fail", "message" : str(e)}
+    
     def addShedule(self, shedule: Schedule):
         try :
             type_ = shedule.type_
@@ -221,6 +246,10 @@ async def actionNow(request: Request):
         return AF.actionNow(json.get("type_"), flag)
     return AF.actionNow(json.get("type_"), json.get("timeWater"))
 
+@app.get('/getAllData')
+async def getAddData():
+    return AF.getAllData()
+
 origins = [
     "http://localhost:3000", 
     "*"
@@ -234,4 +263,4 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# uvicorn.run(app, host= "0.0.0.0", port= 8000)
+uvicorn.run(app, host= "0.0.0.0", port= 8000)
