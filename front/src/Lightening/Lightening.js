@@ -4,10 +4,12 @@ import Info from "./Info"
 import Setup from './Setup';
 import Title from './Title';
 import { BrowserRouter as Router, Route, Routes, Link} from "react-router-dom";
+import MyNav from '../MyNav';
 
 function Lightening() {
     return (
       <div>
+        <MyNav/>
         <Title/>
         <Nav className = "nav">
         <Nav.Item>

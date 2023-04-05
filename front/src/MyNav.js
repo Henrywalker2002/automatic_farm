@@ -10,31 +10,16 @@ function MyNav() {
   return (
       <Navbar id= "frame2" >
       <Container>
-        <img src= {require('./logoY.png')} alt="strawberry" id="logo" />
+        <img src= {require('./logo_YoloFarm.png')} alt="strawberry" id="logo" />
         {/* <div id="nav"> */}
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse >
           <Nav className="me-auto" id="nav">
-            <Nav.Link href="#home" >Home</Nav.Link>
-            <Nav.Link href="#aboutus">About us</Nav.Link>
-
-            
-              <NavDropdown title="Services" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="/water" id="drop">
-                    {/* <Link to ="/watering">Watering</Link> */}
-                    Watering
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="/light" id="drop">
-                    Lightening
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.3" id="drop">Intrusive Detection</NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.4" id="drop">Reporting</NavDropdown.Item>  
-              </NavDropdown> 
-              
-            
-
-            <Nav.Link href="#home" >Projects</Nav.Link>
-            <Nav.Link href="#home" >Contact</Nav.Link>
+            <Nav.Link href="/" >Home</Nav.Link>
+            <Nav.Link href="/water">Watering</Nav.Link>
+            <Nav.Link href="/light" >Lightening</Nav.Link>
+            <Nav.Link href="/detection" >Intrusive Detection</Nav.Link>
+            <Nav.Link href="/report" >Reporting</Nav.Link>
             
           </Nav>
           <nav>

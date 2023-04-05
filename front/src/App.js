@@ -1,6 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes, Link} from "react-router-dom";
-import MyNav from './MyNav';
 //////
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -18,22 +17,25 @@ import InfoWater from "./Watering/Info";
 import SetupWater from './Watering/Setup';
 import './App.css';
 
+import Login from './Login/Login';
+import Home from './Home/Home';
+
 // import { Route, Routes } from 'react-router-dom';
 // // import navM from './MyNav'
 // import MyNav from './MyNav';
 function App() {
   return (
         <div className = "app">
-          <MyNav />
           <Router>
             <Routes>
               <Route exact path='water/infor' element={ <InfoWater/>} />
               <Route exact path='water/setup' element={< SetupWater/>} />
-              {/* <Route path='/setup' element={< Setup/>} /> */}
+              <Route path='/login' element={< Login/>} />
               <Route path = '/light' element = {< Lightening/>} />
               <Route path = '/light/infor' element = {<InfoLight />} />
               <Route path = '/light/setup' element = {<SetupLight />} />
               <Route path='/water' element = {<Watering />} />
+              <Route exact path='/' element={ <Home/>} />
             </Routes>
           </Router>
         </div>
