@@ -20,6 +20,7 @@ class IOT:
     def __init__(self):
         pass
     
+    @classmethod
     def collectData(self): 
         while True:
             dataCollection = aio.receive("datacollection").value
@@ -109,7 +110,7 @@ class IOT:
 
 if __name__ == "__main__":
     iot = IOT()
-    p1 = multiprocessing.Process(target=iot.collectData)
+    p1 = multiprocessing.Process(target=IOT.collectData)
     p2 = multiprocessing.Process(target=iot.getDetection)
     p1.start()
     p2.start()

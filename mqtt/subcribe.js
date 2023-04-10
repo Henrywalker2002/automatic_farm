@@ -1,10 +1,10 @@
 var mqtt = require('mqtt')
 var settings = {
-    mqttServerUrl : "localhost", 
-    port : 18833,
-    topic : "myTopic"
+    mqttServerUrl : "1a4b5f6bd3224e0e8740003ba2909981.s2.eu.hivemq.cloud", 
+    port : 8883,
+    topic : "myTopic",
     }
-var client  = mqtt.connect('mqtt://' + settings.mqttServerUrl + ":" + settings.port);
+var client  = mqtt.connect('mqtt://' + settings.mqttServerUrl + ":" + settings.port, {username : "henrywalker", password : "password"});
 
 client.on('connect', function () {
     client.subscribe(settings.topic)
