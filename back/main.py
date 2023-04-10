@@ -67,10 +67,8 @@ class AutomaticFarm:
     
     def getData(self):
         try:
-            rows = self.dataColl.find().sort("_id", -1).limit(1)
-            for row in rows:
-                row.pop('_id')
-                return {"result": "success", "message" : row}
+            data = IOT.dataRealTime()
+            return {"result": "success", "message" : data}
         except Exception as e:
             return {"result" : "fail", "message" : str(e)}
     
@@ -198,6 +196,25 @@ class AutomaticFarm:
             return {"result": "success", "message" : "done"}
         except Exception as e:
             return {"result" : "fail", "message" : str(e)}
+    
+    def controlDetection(self, flag : bool):
+        try:
+            if flag:
+               self.iot.controlDetection(1)
+            else:
+               self.iot.controlDetection(0)
+            return {"result": "success", "message" : "done"}
+        except Exception as e:
+            return {"result" : "fail", "message" : str(e)}
+    
+    @classmethod
+    def controlDec():
+        while True:
+            rows = self.dataColl.find().sort("_id", -1).limit(1)
+            temp = None
+            for row in rows:
+                row.pop('_id')
+                
 
 AF = AutomaticFarm()
 
@@ -249,6 +266,15 @@ async def actionNow(request: Request):
 @app.get('/getAllData')
 async def getAddData():
     return AF.getAllData()
+
+@app.post('/controlDetection')
+async def controlDetection(request : Request):
+    json = await request.json()
+    if "flag" in json.keys():
+        return AF.controlDetection(json.get("flag"))
+    else :
+        return {"result": "fail", "message" : "wrong json"}
+    
 
 origins = [
     "http://localhost:3000", 
