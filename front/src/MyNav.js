@@ -1,28 +1,22 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import * as React from "react";
-import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
-import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-import Tabs from "./Watering/Watering";
-import Lightening from "./Lightening/Lightening";
 import "./App.css";
-import AuthContext from "./Login/context/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 
 function MyNav() {
+  const navigate = useNavigate();
   // account menu
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -32,8 +26,8 @@ function MyNav() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const { loginInfo } = React.useContext(AuthContext);
-  console.log(loginInfo);
+  // loginInfo
+  const loginInfo = JSON.parse(localStorage.getItem('token'));
   return (
     <Navbar id="frame2">
       <Container>
@@ -62,7 +56,7 @@ function MyNav() {
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
               >
-                <Avatar sx={{ width: 32, height: 32, backgroundColor: '#229F27' }}>{loginInfo.name[0].toUpperCase()}</Avatar>
+                <Avatar sx={{ width: 32, height: 32, backgroundColor: '#229F27' }}>{loginInfo.username[0]}</Avatar>
               </IconButton>
             </Tooltip>
             <Menu
@@ -101,9 +95,10 @@ function MyNav() {
               anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
             >
               <MenuItem onClick={handleClose}>
-                 <h2 style={{alignItems :'center'}}>{loginInfo.name}</h2>
+                 <h2 style={{alignItems :'center'}}>{loginInfo.username}</h2>
               </MenuItem>
               <MenuItem onClick={handleClose} sx={{alignItems: 'center'}}>
+                {/* {loginInfo.role} */}
                 {loginInfo.role}
               </MenuItem>
               <Divider />
@@ -119,7 +114,7 @@ function MyNav() {
                 </ListItemIcon>
                 Settings
               </MenuItem>
-              <MenuItem onClick={handleClose}>
+              <MenuItem onClick={() => {localStorage.removeItem('token'); navigate('/')}}>
                 <ListItemIcon>
                   <Logout fontSize="small" sx={{color: "#229F27"}} />
                 </ListItemIcon>

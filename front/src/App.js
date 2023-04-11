@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Route, Routes, Link} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 //////
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -28,8 +28,8 @@ function App() {
         <div className = "app">
           <Router>
             <Routes>
-              <Route exact path='water/infor' element={ <InfoWater/>} />
-              <Route exact path='water/setup' element={< SetupWater/>} />
+              <Route exact path='/water/infor' element={ <InfoWater/>} />
+              <Route exact path='/water/setup' element={< SetupWater/>} />
               <Route path='/login' element={< Login/>} />
               <Route path = '/light' element = {< Lightening/>} />
               <Route path = '/light/infor' element = {<InfoLight />} />

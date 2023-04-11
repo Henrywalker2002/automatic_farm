@@ -9,15 +9,13 @@ import Avatar from "@mui/material/Avatar";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Stack from "@mui/material/Stack";
-import { useRef, useState, useEffect, useContext } from "react";
-import AuthContext from "./context/AuthProvider";
+import { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const LOGIN_URL = "http://103.77.173.109:8000/checkAcc";
 
 function Login() {
-  const { loginInfo } = useContext(AuthContext);
   const userRef = useRef();
   const errRef = useRef();
 
@@ -28,6 +26,11 @@ function Login() {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
+    }
+  }, []);
   useEffect(() => {
     userRef.current.focus();
   }, []);
@@ -44,9 +47,15 @@ function Login() {
     };
     try {
       const response = await axios.post(LOGIN_URL, userData);
-      console.log(response.status, response.data.message);
-      loginInfo.name = user;
-      loginInfo.role = response.data.message;
+      console.log(response.status, response.data);
+      localStorage.setItem(
+        "token",
+        JSON.stringify({
+          username: user,
+          role: response.data.message,
+        })
+      );
+      // setLoginInfo(user, response.data.message);
       // console.log(loginInfo);
       setUser("");
       setPwd("");
@@ -57,7 +66,6 @@ function Login() {
       errRef.current.focus();
     }
   };
-
   return (
     <div className="login-page">
       <Grid container>
