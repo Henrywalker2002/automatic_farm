@@ -3,10 +3,10 @@ import Button from 'react-bootstrap/Button';
 import MyNav from '../MyNav';
 import Title from './Title';
 import React, { useEffect, useState } from 'react';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Dialog from '@material-ui/core/Dialog';
-
+import DialogActions from '@mui/material/DialogActions';
+import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from '@mui/material/Dialog';
+import './dec.css';
 const host = "http://103.77.173.109:8000/"
 
 function Detection() {
@@ -54,7 +54,7 @@ function Detection() {
 
     var table = detect.map(e => {
         var date = new Date(e.time)
-        return <p>{(date.toLocaleDateString() + ' ' +  date.toLocaleTimeString())}</p>
+        return <p>{("Date: "+date.toLocaleDateString() + "     "+  "Time: "+date.toLocaleTimeString())}</p>
     })
 
     async function handle() {
@@ -95,8 +95,10 @@ function Detection() {
             <MyNav/>
             <Title />
             <Container>
-             {table}   
-            <Button variant="WaterNow" id="button" type = ""  onClick={handle}>Turn {state}</Button>{' '}
+                <div id ="table">
+                        {table} 
+                </div>
+            <Button variant="WaterNow" id="button_turn" type = ""  onClick={handle}>Turn {state}</Button>{' '}
             </Container>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>

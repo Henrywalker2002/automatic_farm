@@ -1,0 +1,16 @@
+#table{
+    width: 50%;
+    border-radius: 7px;
+    background-color: rgb(190, 244, 208);
+    border: 1px solid #8f8d8d;
+    margin-left: 25%;
+}
+div.p{
+    margin-left: 30%;
+}
+#button_turn{
+    margin-left: 68%;
+    margin-top: 10px;
+    color:#FFFFFF;
+background: #0FA958;
+}

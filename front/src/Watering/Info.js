@@ -3,11 +3,11 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import React from 'react';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContentText from '@mui/material/DialogContentText';
+import Dialog from '@mui/material/Dialog';
 import axios from 'axios';
 import InfoTable from './InfoTable';
 import '../App.css';
@@ -172,10 +172,10 @@ function Info() {
             How long do you want to set ? 
         </DialogTitle>
         <DialogContent>
-          <DialogContentText>
-          <input onChange={(e)=>handle(e)} type="number" name="time" id="in" />
-          <div>
-            <label>Fertilize?</label>
+          <DialogContentText id="dialog">
+          Time: <input onChange={(e)=>handle(e)} type="number" name="time" id="in" />
+          <div id="checkdiv">
+            <label>Fertilize? &nbsp;&nbsp;</label>
             <input onChange={(e)=> handleCheck(e)}  type='checkbox' name = "check" id = "check"/>
           </div>
           {/* <input  type="number" name="time" id="in" /> */}

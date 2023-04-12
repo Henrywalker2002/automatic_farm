@@ -145,7 +145,7 @@ function Report() {
             <MyNav />
             <div class = "title">
                 <img src =  {require("./img/reporticon.png")} alt = "reporticon" id = "reporticon"/>
-                <p id = "title">REPORT</p>
+                <a id = "title">REPORT</a>
             </div>
 
             <Container>
