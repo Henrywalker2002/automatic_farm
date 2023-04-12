@@ -7,7 +7,7 @@ import Axios from 'axios';
 import {MdLight} from "react-icons/md";
 import './App.css';
 function Condition() {
-  const url="http://127.0.0.1:8000/schedule";
+  const url="http://103.77.173.109:8000/schedule";
   const [data,setData]=useState({
     brightness:0
   })
@@ -26,7 +26,6 @@ function Condition() {
   return (
   <div id="condition">
     <div id="c1">Conditions</div>
-    <div id="c2">The last time you lightened was </div>
     <div id="formC"> 
           <label id="labbel">
           <MdLight className='icon'/>

@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');
+.home-page{
+    background-image: url(home_bg.jpg);
+    background-size: cover;
+    height: 100vh;
+}
+.home-content{
+    min-width: 600px;
+    height: 100vh;
+    /* margin-top: 50px; */
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 230px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+.home-description{
+    font-family: 'Italianno', cursive;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 60px;
+    text-align: center;
+
+    color: #000000;
+}
+button.go-to-btn{
+    background: #FFFFFF;
+    border: 1px solid #229F27;
+    border-radius: 5px;
+    width: 210px;
+    margin-top: 50px;
+    margin-left: 200px;
+
+    color: black;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 120%;
+    text-align: center;
+    letter-spacing: 0.02em;
+    color: #229F27;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+.arrow-icon{
+    color: #229F27;
+    margin-left: 8px;
+}

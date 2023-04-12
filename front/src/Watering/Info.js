@@ -9,10 +9,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Dialog from '@material-ui/core/Dialog';
 import axios from 'axios';
-import Chart from './Chart';
 import InfoTable from './InfoTable';
 import '../App.css';
-import Title from './Title';
 import Tabs from './Watering';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { useState, useEffect } from 'react';
@@ -22,6 +20,7 @@ const host = "http://103.77.173.109:8000/"
 function Info() {
 
   var time = 2
+  var checked = false
 
   const [open, setOpen] = React.useState(false);
   
@@ -41,8 +40,13 @@ function Info() {
   }
   async function waterNow(event) {
     event.preventDefault()
+    var type = 1
+    if (checked) {
+      type = 2
+    } 
+
     var data = JSON.stringify({
-      "type_": 1,
+      "type_": type,
       "timeWater": time
     });
 
@@ -67,7 +71,6 @@ function Info() {
     else {
       alert(json.message)
     }
-    
   }
 
   const [data, setData] = useState([])
@@ -78,7 +81,7 @@ function Info() {
       redirect: 'follow'
     };
     
-    const res = await fetch("http://127.0.0.1:8000/getAllData", requestOptions)
+    const res = await fetch("http://103.77.173.109:8000/getAllData", requestOptions)
     const json = await res.json()
     if (json.result === "success") {
       setData(json.message)
@@ -115,6 +118,37 @@ function Info() {
     </LineChart>
   )
 
+  const [state, setState] = useState('on')
+
+  const [act, setAct] = useState('off')
+
+  useEffect(() => {
+    const intervalId = setInterval(async () => {
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      
+      const res = await fetch(host + "getData", requestOptions);
+      const response = await res.json()
+      if (response.message.isWatering || response.message.isFertilizing) {
+          setState('on')
+          setAct('off')
+      } 
+      else {
+          setState('off')
+          setAct('on')
+      }
+
+    }, 1000)
+    return () => clearInterval(intervalId)
+  }, [state, act])
+
+  function handleCheck(e) {
+    checked = e.target.checked
+    console.log(checked)
+  }
+
   return (
   <div>
     <Tabs/>
@@ -132,7 +166,6 @@ function Info() {
     </Container>
     <div id="button_contain">
     <Button variant="Back" id="button">Back</Button>{' '}
-    <Button variant="Save" id="button">Save</Button>{' '}
     <Button variant="WaterNow" id="button" type = ""  onClick={handleClickOpen}>Water Now</Button>{' '}
     <Dialog open={open} onClose={handleClose}>
         <DialogTitle>
@@ -141,6 +174,10 @@ function Info() {
         <DialogContent>
           <DialogContentText>
           <input onChange={(e)=>handle(e)} type="number" name="time" id="in" />
+          <div>
+            <label>Fertilize?</label>
+            <input onChange={(e)=> handleCheck(e)}  type='checkbox' name = "check" id = "check"/>
+          </div>
           {/* <input  type="number" name="time" id="in" /> */}
           {/* onChange={(e)=>handle(e)} value={data.brightness} */}
           </DialogContentText>

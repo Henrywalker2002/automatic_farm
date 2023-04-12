@@ -1,0 +1,117 @@
+/* .login-page{
+    background-image: url(https://t4.ftcdn.net/jpg/05/01/56/31/360_F_501563161_7cGyul38mAIdVGIzPrevhfD0FE1gIUTj.jpg);
+    background-size: cover;
+    height: 100vh;
+    color: #ffffff;
+} */
+.img-bg{
+    background-image: url(https://t4.ftcdn.net/jpg/03/43/42/49/360_F_343424978_abUuM9NlYs6JDeLgQIYPQobSBQLOkLDA.webp);
+    background-size: cover;
+    height: 100vh;
+}
+
+/* login section */
+.login-box{
+    /* background-size: cover; */
+    height: 100vh;
+    min-height: 500px;
+    /* background-color: #3b33d5; */
+}
+
+.logo_YoloFarm{
+    align-items: center;        
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+}
+.logo_YoloFarm img{
+    width: 90px;
+    height: 90px;
+}
+.welcome{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 44px;
+    text-align: center;
+    letter-spacing: -0.64px;
+    color: #285A43;
+}
+
+.login-title{
+    margin-top: 40px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 70px;
+    text-align: center;
+    letter-spacing: -1.34px;
+    color: #229F27;
+}
+#username , #password{
+    width: 300px;
+    height: 15px;
+    /* border: 2px solid #032D23; */
+    border-radius: 6px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.forgot-pw{
+    cursor: pointer;
+    padding-top: 5px;
+} 
+span.MuiTypography-root.MuiTypography-body1.forgot-pw.css-ahj2mt-MuiTypography-root{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 34px;
+    letter-spacing: -0.33px;
+    color: #032D23;
+}
+
+span.MuiTypography-root.MuiTypography-body1.MuiFormControlLabel-label.css-ahj2mt-MuiTypography-root{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 34px;
+    letter-spacing: -0.33px;
+    color: #032D23;
+}
+button.login-btn {
+    width: 330px;
+    height: 40px;
+    background: #229F27;
+    border-radius: 6px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 34px;
+    letter-spacing: -0.33px;
+    color: #FFFFFF;
+}
+.login-btn :hover{
+    background-color: #117015;
+}
+
+/* login success !!! */
+.success-msg{
+    font-family: 'Poppins';
+    font-style: normal;
+    text-align: center;
+    letter-spacing: -0.64px;
+    color: #229F27;
+}
+.next-btn{
+    margin-left: 350px;
+    margin-right: auto;
+    width: 100px;
+    background-color: #229F27;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+}

@@ -16,6 +16,8 @@ import Dialog from '@material-ui/core/Dialog';
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
+const host = "http://103.77.173.109:8000/"
+
 function Info() {
   var isOn = 2
   const [open, setOpen] = React.useState(false);
@@ -33,6 +35,30 @@ function Info() {
     console.log(isOn)
   }
 
+  const [state, setState] = useState('on')
+  const [act, setAct] = useState('off')
+
+  useEffect(() => {
+    const intervalId = setInterval(async () => {
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      
+      const res = await fetch(host + "getData", requestOptions);
+      const response = await res.json()
+      if (response.message.isLighting) {
+          setState('on')
+          setAct('off')
+      } 
+      else {
+          setState('off')
+          setAct('on')
+      }
+    }, 1000)
+    return () => clearInterval(intervalId)
+  }, [state, act])
+
   const [data, setData] = useState([])
 
   async function getData() {
@@ -41,7 +67,7 @@ function Info() {
       redirect: 'follow'
     };
     
-    const res = await fetch("http://127.0.0.1:8000/getAllData", requestOptions)
+    const res = await fetch("http://103.77.173.109:8000/getAllData", requestOptions)
     const json = await res.json()
     if (json.result === "success") {
       setData(json.message)
@@ -75,12 +101,15 @@ function Info() {
     </LineChart>
   )
 
-  async function waterNow(event) {
+  async function lightNow(event) {
     event.preventDefault()
     // var time = parseInt(event.target.time.value)
     var flag=0
-    if (isOn){
-      flag=1
+    if (state === 'on'){
+      flag = 0
+    }
+    else {
+      flag = 1
     }
     var data = JSON.stringify({
       "type_": 3,
@@ -89,7 +118,7 @@ function Info() {
     var config = {
       method: 'post',
     maxBodyLength: Infinity,
-      url: 'http://127.0.0.1:8000/actionNow',
+      url: 'http://103.77.173.109:8000/actionNow',
       headers: { 
         'Content-Type': 'application/json'
       },
@@ -127,7 +156,7 @@ function Info() {
 
           <div id="button_contain">
           <Button variant="Back" id="button">Back</Button>{' '}
-          <Button variant="WaterNow" id="button" type = "" onClick={handleClickOpen}>Lightening Now</Button>{' '}
+          <Button variant="WaterNow" id="button" type = "" onClick={lightNow}>Turn {act}</Button>{' '}
           <Dialog open={open} onClose={handleClose}>
         <DialogTitle>
            Turn light on ? 
@@ -143,7 +172,7 @@ function Info() {
           <Button onClick={handleClose} color="primary">
            Close
           </Button>
-          <Button onClick={waterNow} color="primary" autoFocus>
+          <Button onClick={lightNow} color="primary" autoFocus>
            Yes
           </Button>
         </DialogActions>

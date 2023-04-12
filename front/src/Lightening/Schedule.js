@@ -25,7 +25,6 @@ function Condition() {
   return (
   <div id="schedule">
     <div id="c1">Schedule</div>
-    <div id="c2">The last time you lightened was </div>
     <div id="formC"> 
       <label id="labbel">
       <img src= {require('./img/day.png')} alt="strawberry" id="img" />

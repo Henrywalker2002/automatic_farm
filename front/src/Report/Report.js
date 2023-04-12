@@ -5,10 +5,13 @@ import './report.css'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
 import { format } from 'date-fns'
+import MyNav from '../MyNav';
 
 function Report() {
+    if (localStorage.getItem("token") === null) {
+        window.location.replace('/login')
+    }
     const [data, setData] = useState([])
     const [temp, setTemp] = useState('')
     const [light, setLight] = useState('')
@@ -23,7 +26,7 @@ function Report() {
           redirect: 'follow'
         };
         
-        const res = await fetch("http://127.0.0.1:8000/getAllData", requestOptions)
+        const res = await fetch("http://103.77.173.109:8000/getAllData", requestOptions)
         const json = await res.json()
         if (json.result === "success") {
           setData(json.message)
@@ -139,6 +142,7 @@ function Report() {
 
     return (
         <div>
+            <MyNav />
             <div class = "title">
                 <img src =  {require("./img/reporticon.png")} alt = "reporticon" id = "reporticon"/>
                 <p id = "title">REPORT</p>

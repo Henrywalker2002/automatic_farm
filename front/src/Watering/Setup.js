@@ -67,6 +67,7 @@ function Setup() {
       date = day + '/' + month + '/' + year
     }
     // begin call json
+    const loginInfo = JSON.parse(localStorage.getItem('token'));
     var data = JSON.stringify({
       "type_": type_,
       "airHumidity": humidity,
@@ -75,19 +76,19 @@ function Setup() {
       "isEveryday": isEveryday,
       "date": date,
       "timeWater": time,
-      "username": "string"
+      "username": JSON.parse(localStorage.getItem('token')).username
     });
     
+    console.log(localStorage.getItem("token"))
     var config = {
       method: 'post',
-    maxBodyLength: Infinity,
-      url: host + '/schedule',
+      maxBodyLength: Infinity,
+      url: 'http://103.77.173.109:8000/schedule',
       headers: { 
         'Content-Type': 'application/json'
       },
       data : data
     };
-    console.log(typeof(tempCond))
     var res = await axios(config)
     var json = await res.data
     if (json.result === "success") {

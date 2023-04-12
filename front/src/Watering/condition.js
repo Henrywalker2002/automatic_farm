@@ -1,13 +1,8 @@
-// import Container from 'react-bootstrap/Container';
-// import Nav from 'react-bootstrap/Nav';
-// import Navbar from 'react-bootstrap/Navbar';
-// import NavDropdown from 'react-bootstrap/NavDropdown';
 import React, {  useState } from 'react';
-import Tabs from './Watering'
 import Axios from 'axios';
 import '../App.css';
 function Condition() {
-  const url="http://127.0.0.1:8000/schedule";
+  const url="http://103.77.173.109:8000/schedule";
   const [data,setData]=useState({
     tem:0,
     soil:0,
@@ -27,14 +22,17 @@ function Condition() {
     setData(newdata)
     console.log(newdata)
   }
+
+
+
   return (
   <div id="condition">
     <div id="c1">Conditions</div>
-    <div id="c2">The last time you watered was </div>
+
     <div id="formC"> 
           <label id="labbel">
           <img src= {require('./img/tem.png')} alt="strawberry" id="img" />
-          &#160; Temperature  &#160;  &#62;
+          &#160; Temperature  &#160;  &#60;
             <input onChange={(e)=>handle(e)} value={data.temperature} type="number" name="tem" id="in" />
           </label>
           <div>
@@ -47,7 +45,7 @@ function Condition() {
           <div>
             <label id="labbel">
             <img src= {require('./img/air.png')} alt="strawberry" id="img" />
-            &#160; Air humidity     &#160;   &#62;
+            &#160; Air humidity     &#160;   &#60;
               <input onChange={(e)=>handle(e)} value={data.airHumidity} type="number" name="air" id="in" />
             </label>
           </div>
