@@ -13,6 +13,7 @@ import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import "./App.css";
 import { useNavigate } from "react-router-dom";
+import  { redirect } from 'react-router-dom'
 
 
 function MyNav() {
@@ -27,6 +28,7 @@ function MyNav() {
     setAnchorEl(null);
   };
   // loginInfo
+
   const loginInfo = JSON.parse(localStorage.getItem('token'));
   return (
     <Navbar id="frame2">

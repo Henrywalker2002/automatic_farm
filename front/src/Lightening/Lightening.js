@@ -5,8 +5,13 @@ import Setup from './Setup';
 import Title from './Title';
 import { BrowserRouter as Router, Route, Routes, Link} from "react-router-dom";
 import MyNav from '../MyNav';
+import { redirect } from 'react-router-dom';
 
 function Lightening() {
+
+  if (localStorage.getItem("token") === null) {
+    window.location.replace('/login')
+  }
     return (
       <div>
         <MyNav/>

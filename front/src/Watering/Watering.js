@@ -8,6 +8,9 @@ import '../Nhi.css';
 import MyNav from '../MyNav';
 
 function Watering() {
+  if (localStorage.getItem("token") === null) {
+    window.location.replace('/login')
+  }
   return (
     <div>
       <MyNav/>
