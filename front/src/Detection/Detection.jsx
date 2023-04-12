@@ -11,6 +11,10 @@ const host = "http://103.77.173.109:8000/"
 
 function Detection() {
 
+    if (localStorage.getItem("token") === null) {
+        window.location.replace('/login')
+    }
+
     const [state, setState] = useState('off')
     const [open, setOpen] = useState(false)
   
