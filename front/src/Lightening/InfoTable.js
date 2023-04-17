@@ -53,7 +53,7 @@ function InfoTable() {
                 <FaTemperatureHigh style={iconStyle}/> 
                 light
                 <Badge bg="success">
-                    {data.temperature}
+                    {data.brightness}
                     {/* <RiCelsiusFill/> */}
                 </Badge> 
             </ListGroup.Item>

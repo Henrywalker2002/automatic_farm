@@ -16,8 +16,6 @@ function SetupLight() {
     return str
   }
 
- 
-
   async function handleData(event) {
     event.preventDefault()
     var isEveryday = event.target.isEday.checked

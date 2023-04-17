@@ -32,8 +32,9 @@ def connect_mqtt():
             IOT.getDetection(str(message.payload)[2:-1])
         elif message.topic == "244_dataCollection":
             templst = str(message.payload)[2:-1].split(':')
+            print(templst)
             global temperature, airHumidity, soilMoisture, brightness
-            temperature, airHumidity, soilMoisture, brightness = templst[0], templst[1], templst[2], templst[3]
+            temperature, airHumidity, soilMoisture, brightness = int(templst[0]), int(templst[1]), int(templst[2]), int(templst[3])
         elif message.topic == "244_isLighting":
             global isLighting 
             isLighting = bool(int(str(message.payload)[2:-1]))
