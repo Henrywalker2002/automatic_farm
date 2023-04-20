@@ -20,7 +20,7 @@ function SetupLight() {
     event.preventDefault()
     var isEveryday = event.target.isEday.checked
     var brightness = parseInt(event.target.brightness.value)
-    var time = parseInt(event.target.time.value)
+    // var time = parseInt(event.target.time.value)
     var type_ = 3, date = null
     if (!isEveryday) {
       var day = helper(new Date().getDay().toString())
@@ -36,22 +36,23 @@ function SetupLight() {
       // "temperature": tempCond,
       "isEveryday": isEveryday,
       "date": date,
-      "timeWater": time,
+      "timeWater": 1,
       "username": "string"
     });
     
     var config = {
       method: 'post',
     maxBodyLength: Infinity,
-      url: 'http://127.0.0.1:8000/schedule',
+      url: 'http://103.77.173.109:8000/schedule',
       headers: { 
         'Content-Type': 'application/json'
       },
       data : data
     };
-    console.log(typeof(tempCond))
+
     var res = await axios(config)
     var json = await res.data
+    console.log(json)
     if (json.result === "success") {
       window.location.reload()
     }

@@ -33,13 +33,13 @@ function Condition() {
       {/* value="Paneer" */}
       </label>
       
-      <div>
+      {/* <div>
       <label id="labbel">
       <img src= {require('./img/time.png')} alt="strawberry" id="img" />
       &#160; Set time:  &#160;  
         <input onChange={(e)=>handle(e)} value={data.timeWater} type="number" name="time" id="in" />
-      </label>
-      </div>
+      </label>  
+      </div> */}
     </div>
     
   </div>
