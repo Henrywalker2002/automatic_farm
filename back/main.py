@@ -10,6 +10,12 @@ import multiprocessing
 import dateutil
 import dateutil.parser
 from dateutil import tz
+import logging
+
+uvicorn_error = logging.getLogger("uvicorn.error")
+uvicorn_error.disabled = True
+uvicorn_access = logging.getLogger("uvicorn.access")
+uvicorn_access.disabled = True
 
 app = FastAPI()
 
