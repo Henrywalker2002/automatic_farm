@@ -34,21 +34,26 @@ def connect_mqtt():
             templst = str(message.payload)[2:-1].split(':')
             print(templst)
             global temperature, airHumidity, soilMoisture, brightness
-            temperature, airHumidity, soilMoisture, brightness = int(templst[0]), int(templst[1]), int(templst[2]), int(templst[3])
+            temperature, airHumidity, soilMoisture, brightness = float(templst[0]), float(templst[1]), float(templst[2]), float(templst[3])
         elif message.topic == "244_isLighting":
             global isLighting 
+            print(message.payload)
             isLighting = bool(int(str(message.payload)[2:-1]))
         elif message.topic == "244_isFertilizing":
             global isFertilize 
+            print(message.payload)
             isFertilize = bool(int(str(message.payload)[2:-1]))
         elif message.topic == "244_isWatering":
             global isWatering 
+            print(message.payload)
             isWatering = bool(int(str(message.payload)[2:-1]))
         elif message.topic == "244_lastTimeWater":
             global lastTimeWater
+            print(message.payload)
             lastTimeWater = str(message.payload)[2:-1]
         elif message.topic == "244_lastTimeFertilize":
             global lastTimeFertilize
+            print(message.payload)
             lastTimeFertilize = str(message.payload)[2:-1]
     
     client = mqtt_client.Client(client_id)
