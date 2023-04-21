@@ -7,10 +7,12 @@ import Schedule from './schedule';
 import axios from 'axios';
 import Tabs from './Watering'
 import '../App.css';
+import { useNavigate } from 'react-router-dom';
 
 const host = "http://103.77.173.109:8000/"
 
 function Setup() {
+  const navigate = useNavigate();
   function helper(str) {
     if (str.length === 1) {
       return '0' + str
@@ -115,7 +117,7 @@ function Setup() {
     </Container>
 
     <div id="button_contain">
-    <Button variant="Back" id="button">Back</Button>{' '}
+    <Button variant="Back" id="button" onClick={() => navigate('/water')}>Back</Button>{' '}
     <Button variant="Save" id="button" type = "submit">Save</Button>{' '}
     
     </div>

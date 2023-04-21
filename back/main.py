@@ -173,10 +173,10 @@ class AutomaticFarm:
             for row in rows:
                 row.pop('_id')
                 temp = (row.get("time"))
-                from_zone = tz.gettz('UTC')
-                to_zone = tz.gettz('Asia/vietnam')
-                temp = temp.replace(tzinfo = from_zone)
-                temp = temp.astimezone(to_zone)
+                # from_zone = tz.gettz('UTC')
+                # to_zone = tz.gettz('Asia/vietnam')
+                # temp = temp.replace(tzinfo = from_zone)
+                # temp = temp.astimezone(to_zone)
                 res.append({"time": (temp)})
             return {"result":"success", "message" : res}
         except Exception as e:

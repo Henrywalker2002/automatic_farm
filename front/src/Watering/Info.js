@@ -14,11 +14,12 @@ import '../App.css';
 import Tabs from './Watering';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 // import { Tabs } from '@material-ui/core';
 
 const host = "http://103.77.173.109:8000/"
 function Info() {
-
+  const navigate = useNavigate()
   var time = 2
   var checked = false
 
@@ -165,7 +166,7 @@ function Info() {
       
     </Container>
     <div id="button_contain">
-    <Button variant="Back" id="button">Back</Button>{' '}
+    <Button variant="Back" id="button" onClick={() => navigate('/water')}>Back</Button>{' '}
     <Button variant="WaterNow" id="button" type = ""  onClick={handleClickOpen}>Water Now</Button>{' '}
     <Dialog open={open} onClose={handleClose}>
         <DialogTitle>

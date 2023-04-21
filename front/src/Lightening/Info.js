@@ -13,12 +13,15 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContentText from '@mui/material/DialogContentText';
 import Dialog from '@mui/material/Dialog';
+import { useNavigate } from 'react-router-dom';
+
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const host = "http://103.77.173.109:8000/"
 
 function Info() {
+  const navigate = useNavigate();
   var isOn = 2
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
@@ -155,7 +158,8 @@ function Info() {
           </Container>
 
           <div id="button_contain">
-          <Button variant="Back" id="button">Back</Button>{' '}
+
+          <Button variant="Back" id="button" onClick={() => {navigate("/light")}}>Back</Button>{' '}
           <Button variant="WaterNow" id="button" type = "" onClick={lightNow}>Turn {act}</Button>{' '}
           <Dialog open={open} onClose={handleClose}>
         <DialogTitle>

@@ -7,8 +7,10 @@ import Schedule from './Schedule';
 import axios from 'axios';
 import './App.css';
 import Lightening from './Lightening';
+import { useNavigate } from 'react-router-dom';
 
 function SetupLight() {
+  const navigate = useNavigate()
   function helper(str) {
     if (str.length === 1) {
       return '0' + str
@@ -76,7 +78,7 @@ function SetupLight() {
     </Container>
 
     <div id="button_contain">
-    <Button variant="Back" id="button">Back</Button>{' '}
+    <Button variant="Back" id="button" onClick={() => navigate('/light')}>Back</Button>{' '}
     <Button variant="Save" id="button" type = "submit">Save</Button>{' '}
     
     </div>
